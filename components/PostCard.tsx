@@ -1,35 +1,37 @@
-import React from 'react'
-import moment from 'moment'
-import Link from 'next/link'
+import React from "react";
+import moment from "moment";
+import Link from "next/link";
 
 type post = {
-    title?: string;
+    data?: string;
     excerpt?: string;
 };
 
-const PostCard = ({title, excerpt}: post) => {
+const PostCard = ({ data }: any) => {
     return (
-        <div className= 'pointer-events-auto cursor-pointer bg-white leading-5 shadow-xl shadow-black/5 hover:bg-slate-100 ring-1 ring-slate-700/10 rounded-lg p-0 lg:p-8 pb-12 mb-10' key={title}>
-            <div className='relative overflow-hidden  pb-80 mb-6 lg:rounded-lg'>
-                {/* <Link href={`/post/${post.slug}`}> */}
-                    {/* <img 
-                        src={post.featuredimage.url} 
-                        alt={post.title} 
-                        className='object-top absolute h-auto w-full object-cover shadow-md rounded-t-lg lg:rounded-lg'
-                    /> */}
-                {/* </Link> */}
-            </div>
-            <h1 className='transition duration-700 mb-4 cursor-pointer hover:text-pink-600 text-3xl font-semibold mx-4 lg:mx-0'>
-                {/* <Link href={`/post/${post.slug}`}> */}
-                    {title}
-                {/* </Link> */}
-            </h1>
-            <p className='text-lg text-gray-700 font-normal px-4 lg:px-0 mb-4'>
-                {/* <Link href={`/post/${post.slug}`}> */}
-                    {excerpt}
-                {/* </Link> */}
-            </p>
-            {/* <div className='flex lg:flex mb-4 w- px-4 lg:px-0'>
+        <div key={data.id}>
+            <Link href={`/${data.id}`}>
+                <div className="pointer-events-auto cursor-pointer bg-white leading-5 shadow-xl shadow-black/5 hover:bg-slate-100 ring-1 ring-slate-700/10 rounded-lg p-0 lg:p-8 pb-12 mb-10">
+                    <div className="relative mb-6 lg:rounded-lg">
+                        {/* <Link href={`/post/${post.slug}`}> */}
+                        <img 
+                        src={data.jetpack_featured_media_url} 
+                        alt={data.title.rendered} 
+                        className='h-auto w-full object-cover shadow-md rounded-t-lg lg:rounded-lg'
+                    />
+                        {/* </Link> */}
+                    </div>
+                    <h1 className="transition duration-700 mb-4 cursor-pointer hover:text-pink-600 text-3xl font-semibold mx-4 lg:mx-0">
+                        {/* <Link href={`/post/${post.slug}`}> */}
+                        {data.title.rendered}
+                        {/* </Link> */}
+                    </h1>
+                    <p className="text-lg text-gray-700 font-normal px-4 lg:px-0 mb-4">
+                        {/* <Link href={`/post/${post.slug}`}> */}
+                        {data.excerpt.rendered}
+                        {/* </Link> */}
+                    </p>
+                    {/* <div className='flex lg:flex mb-4 w- px-4 lg:px-0'>
                 <div className='flex lg:mb-0 lg:w-auto mr-8'>
                     <img 
                         src={post.author.photo.url} 
@@ -51,8 +53,10 @@ const PostCard = ({title, excerpt}: post) => {
                     </p>
                 </div>
             </div> */}
+                </div>
+            </Link>
         </div>
-    )
-}
+    );
+};
 
-export default PostCard
+export default PostCard;

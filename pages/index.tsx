@@ -1,22 +1,17 @@
 import type { NextPage } from "next";
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
+import {getPosts} from "../services/index";
 
-const posts = [
-    { title: "Next JS", excerpt: "Learn next JS" },
-    { title: "Next with Tailwing", excerpt: "Learn next with tailwind" },
-];
-
-const Home: NextPage = () => {
+const Home: NextPage = ({ posts }) => {
+  console.log(posts);
     return (
         <Layout title="Jurnalistika by bagas">
             <div className="max-w-7xl mx-auto py-6 px-4 md:px-2 lg:px-2 xl:px-0">
                 <main className="flex flex-col">
                     {posts.map((post) => (
                         <PostCard
-                            title={post.title}
-                            excerpt={post.excerpt}
-                            key={post.title}
+                            data={post}
                         />
                     ))}
                 </main>
@@ -26,3 +21,24 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const res = await fetch('https://internal.jurnalistika.id/wp-json/wp/v2/posts')
+  const posts = await res.json()
+    console.log("posts");
+  console.log(posts);
+  return {
+    props: {
+      posts,
+    },
+  }
+}
+
+// export async function getStaticProps({ preview = false }){
+//   const posts = (await getPosts()) || [];
+//   console.log("posts");
+//   console.log(posts);
+//   return {
+//     props: { posts }
+//   }
+// }
